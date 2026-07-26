@@ -12,8 +12,8 @@ My first C programming project built using Xcode.
 ## Features
 
 - Add Student
-- View Students (In Progress)
-- Search Student (Coming Soon)
+- View Students 
+- Search Student 
 - Delete Student (Coming Soon)
 
 ## Technologies
