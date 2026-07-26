@@ -43,9 +43,54 @@ void addStudent(void)
     
           printf("\nStudent added successfully!\n");
     
-    
-    
+    }
+   
+void viewstudent(void)
+{
+    int i;
+
+        printf("\n========== STUDENT LIST ==========\n");
+
+        if (studentCount == 0)
+        {
+            printf("No students found.\n");
+            return;
+        }
+
+        for (i = 0; i < studentCount; i++)
+        {
+            printf("\nStudent %d\n", i + 1);
+            printf("ID   : %d\n", students[i].id);
+            printf("Name : %s\n", students[i].name);
+            printf("Age  : %d\n", students[i].age);
+            printf("GPA  : %.2f\n", students[i].gpa);
+        }
 }
+    
+void searchStudent(void)
+{
+    int id;
+       int i;
+
+       printf("\nEnter Student ID to search: ");
+       scanf("%d", &id);
+    
+    for(i = 0; i < studentCount; i++)
+    {
+        if(students[i].id == id)
+        {
+            printf("\nStudent Found!\n");
+            printf("ID   : %d\n", students[i].id);
+            printf("Name : %s\n", students[i].name);
+            printf("Age  : %d\n", students[i].age);
+            printf("GPA  : %.2f\n", students[i].gpa);
+
+            return;
+        }
+        printf("\nStudent not found.\n");
+    }
+}
+
 
 int main(void)
 {
@@ -67,9 +112,7 @@ int main(void)
         printf("Enter your choice: ");
         scanf("%d", &choice);
         
-        studentCount++;
         
-        printf("\nStudent added successfully!\n");
         
         switch (choice)
         {
@@ -78,12 +121,12 @@ int main(void)
                 break;
                 
             case 2:
-                printf("\nView Students selected.\n");
+                viewstudent();
                 break;
                 
             case 3:
-                printf("\nSearch Student selected.\n");
-                break;
+                searchStudent();
+                    break;
                 
             case 4:
                 printf("\nDelete Student selected.\n");
@@ -91,13 +134,15 @@ int main(void)
                 
             case 5:
                 printf("\nExiting Program...\n");
-                break;
+                return 0;
                 
             default:
                 printf("\nInvalid choice!\n");
         }
     }
 }
+
+
 
 
 
