@@ -87,8 +87,97 @@ void searchStudent(void)
 
             return;
         }
+       
+    }
+    printf("\nStudent not found.\n");
+}
+
+void deleteStudent(void)
+{
+    int id;
+    int i;
+    int found = 0;
+    
+    printf("\nEnter Student ID to delete: ");
+    scanf("%d", &id);
+    
+    for(i = 0; i < studentCount; i++)
+    {
+        if(students[i].id == id)
+        {
+            for(int j = i; j < studentCount - 1; j++)
+            {
+                students[j] = students[j + 1];
+            }
+            studentCount--;
+            found = 1;
+
+            printf("\nStudent deleted successfully!\n");
+
+            break;
+        }
+    }
+    if(found == 0)
+    {
         printf("\nStudent not found.\n");
     }
+
+}
+
+void saveStudents(void)
+
+{
+    int i;
+    FILE *fp;
+
+      fp = fopen("students.txt", "w");
+    if(fp == NULL)
+    {
+        printf("Error opening file!\n");
+        return;
+    }
+        
+       
+        for(i = 0; i < studentCount; i++)
+        {
+            fprintf(fp, "%d %s %d %.2f\n",
+                    students[i].id,
+                    students[i].name,
+                    students[i].age,
+                    students[i].gpa);
+        }
+    
+    fclose(fp);
+
+    printf("Students saved successfully!\n");
+}
+
+void loadStudents(void)
+{
+    FILE *fp;
+
+    fp = fopen("students.txt", "r");
+
+    if (fp == NULL)
+    {
+        printf("No saved data found.\n");
+        return;
+    }
+
+    studentCount = 0;
+
+    while (fscanf(fp, "%d %s %d %f",
+                  &students[studentCount].id,
+                  students[studentCount].name,
+                  &students[studentCount].age,
+                  &students[studentCount].gpa) == 4)
+    {
+        studentCount++;
+    }
+
+    fclose(fp);
+
+    printf("\n%d students loaded successfully!\n", studentCount);
 }
 
 
@@ -107,7 +196,9 @@ int main(void)
         printf("2. View Students\n");
         printf("3. Search Student\n");
         printf("4. Delete Student\n");
-        printf("5. Exit\n\n");
+        printf("5. Save Students\n");
+        printf("6. Load Students\n");
+        printf("7. Exit\n\n");
         
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -129,16 +220,24 @@ int main(void)
                     break;
                 
             case 4:
-                printf("\nDelete Student selected.\n");
+                deleteStudent();
                 break;
                 
             case 5:
-                printf("\nExiting Program...\n");
-                return 0;
-                
-            default:
-                printf("\nInvalid choice!\n");
-        }
+                    saveStudents();
+                    break;
+
+                case 6:
+                    loadStudents();
+                    break;
+
+                case 7:
+                    printf("\nExiting Program...\n");
+                    return 0;
+
+                default:
+                    printf("\nInvalid choice!\n");
+            }
     }
 }
 
