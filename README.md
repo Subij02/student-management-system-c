@@ -10,6 +10,7 @@ A console-based Student Management System written in C using Xcode.
 - ✅ Delete Student
 - ✅ Save Students to File
 - ✅ Load Students from File
+- Modular programming (.c/.h)
 
 ## Technologies Used
 
@@ -36,15 +37,19 @@ StudentManagementSystem
 ├── students.txt
 ├── StudentManagementSystem.xcodeproj
 └── StudentManagementSystem
-    └── main.c
+    ├── main.c
+    ├── student.c
+    └── student.h
 ```
+
 
 ## Future Improvements
 
+- Update Student Details
+- Sort Students
+- Search by Name
 - Input Validation
-- Edit Student Details
-- Better User Interface
-- Modular Programming (.c / .h files)
+- Better Console UI
 
 ## Author
 
